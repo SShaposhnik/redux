@@ -1,8 +1,8 @@
 export interface IFormProps{
-  user: IUser
+  user: User
 }
 
-export interface IUser {
+export type User = {
   id: number | null,
   name: string | null
 }

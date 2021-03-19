@@ -1,25 +1,18 @@
-import { ILayoutStore, IUser } from 'interfaces'
+import { ILayoutStore, User } from 'interfaces'
 import {
   observable,
-  computed,
-  action,
   configure,
-  runInAction,
   toJS,
-  makeObservable
+  makeAutoObservable
 } from 'mobx'
 
 configure({ enforceActions: 'observed' })
 
 class LayoutStore implements ILayoutStore{
-  user: IUser
+  @observable user: User
 
   constructor() {
-    makeObservable(this, {
-      user: observable,
-      setUser: action,
-      userInfo: computed
-    })
+    makeAutoObservable(this)
 
     this.user = {
       id: null,
@@ -27,6 +20,11 @@ class LayoutStore implements ILayoutStore{
     }
   }
 
+  /**
+   * Set user name
+   * @param id
+   * @param name
+   */
   setUser(id: number, name: string): void {
     this.user = {
       id: id,
@@ -34,11 +32,10 @@ class LayoutStore implements ILayoutStore{
     }
   }
 
-  get userInfo() {
+  get userInfo(): User {
     return toJS(this.user)
   }
-
 }
 
 export { LayoutStore }
-export default new LayoutStore
+export default new LayoutStore()
