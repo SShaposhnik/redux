@@ -3,10 +3,14 @@ import { IFormProps } from 'interfaces'
 
 
 const Form: React.FC<IFormProps> = (props) => {
+  const {
+    user
+  } = props
 
   return (
     <div>
-      123
+      ID: {user.id}
+      Имя: {user.name}
     </div>
   )
 }
